@@ -48,41 +48,8 @@ Deploy a Kubernetes cluster on AWS using EC2 On-Demand Instances to achieve **re
 ---
 
 ## 🏗️ Architecture
-┌─────────────────────────────────────────────────────────────────┐
-│ AWS Region (us-east-1)                                          │
-│                                                                 │
-│ ┌─────────────────────────────────────────────────────────┐     │
-│ │ VPC: 10.100.0.0/16                                      │     │
-│ │ ┌─────────────────────────────────────────────────┐     │     │
-│ │ │ Public Subnets                                  │     │     │
-│ │ │ ┌──────────────┐ ┌──────────────┐               │     │     │
-│ │ │ │ 10.100.1.0/24│ │ 10.100.2.0/24│               │     │     │
-│ │ │ │ (AZ-1a)      │ │      (AZ-1b) │               │     │     │
-│ │ │ └──────────────┘ └──────────────┘               │     │     │
-│ │ └─────────────────────────────────────────────────┘     │     │
-│ │                                                         │     │ 
-│ │ ┌─────────────────────────────────────────────────┐     │     │
-│ │ │ EKS Cluster                                     │     │     │
-│ │ │ ┌─────────────┐                                 │     │     │
-│ │ │ │Control Plane│ (Managed by AWS)                │     │     │
-│ │ │ └─────────────┘                                 │     │     │
-│ │ │                                                 │     │     │
-│ │ │ ┌─────────────────────────────────────────┐     │     │     │
-│ │ │ │ Worker Node Groups                      │     │     │     │
-│ │ │ │ ┌─────────┐ ┌─────────┐ ┌─────────┐     │     │     │     │
-│ │ │ │ │On-Demand│ │On-Demand│ │On-Demand│     │     │     │     │
-│ │ │ │ │ Node    │ │ Node    │ │ Node    │     │     │     │     │
-│ │ │ │ └─────────┘ └─────────┘ └─────────┘     │     │     │     │
-│ │ │ └─────────────────────────────────────────┘     │     │     │
-│ │ └─────────────────────────────────────────────────┘     │     │
-│ └─────────────────────────────────────────────────────────┘     │
-└─────────────────────────────────────────────────────────────────┘
-▲
-│ (kubectl access)
-┌─────────────┐
-│ Laptop      │
-│ (AWS CLI)   │
-└─────────────┘
+
+![Architecture](./screenshots/Architecture%20Kubernetes%20Cluster%20on%20AWS%20EKS%20with%20On-Demand%20Instances.png)
 
 ---
 
@@ -97,7 +64,7 @@ Deploy a Kubernetes cluster on AWS using EC2 On-Demand Instances to achieve **re
 
 ### **Installation Commands**
 
-```bash
+###```bash
 # Install kubectl (Linux)
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 chmod +x kubectl
@@ -130,7 +97,7 @@ aws sts get-caller-identity
 echo "=== Project: Kubernetes on AWS EKS ===" > k8s-project-notes.txt
 echo "Region: us-east-1" >> k8s-project-notes.txt
 echo "Date Started: $(date)" >> k8s-project-notes.txt
-
+---
 
 
 🌐 Phase 2: VPC & Networking
@@ -159,7 +126,6 @@ Value: owned
 ![VPC](./screenshots/VPC%20networking.png)
 
 
-
 🔐 Phase 3: IAM Roles
 Cluster Role (eks-learning-cluster-role):
 IAM Console → Roles → Create role
@@ -181,9 +147,9 @@ Update Trust Policy:
     }
   ]
 }
-
+----
 ![eks-learning-cluster-role](./screenshots/eks-learning-cluster-role.png)
-
+---
 Node Role (eks-learning-node-role):
 IAM Console → Roles → Create role
 Trusted entity: AWS service → EC2
