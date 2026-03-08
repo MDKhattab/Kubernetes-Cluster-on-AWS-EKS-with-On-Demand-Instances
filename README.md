@@ -16,7 +16,6 @@ A comprehensive guide to deploying a production-ready Kubernetes cluster on AWS 
 - [Phase 5: kubectl Configuration](#phase-5-kubectl-configuration)
 - [Phase 6: Node Group Creation](#phase-6-node-group-creation)
 - [Phase 7: Application Deployment](#phase-7-application-deployment)
-- [Troubleshooting Guide](#troubleshooting-guide)
 - [Cleanup](#cleanup)
 - [Lessons Learned](#lessons-learned)
 
@@ -85,42 +84,6 @@ Deploy a Kubernetes cluster on AWS using EC2 On-Demand Instances to achieve **re
 │ (AWS CLI)   │
 └─────────────┘
 
-
-┌─────────────────────────────────────────────────────────────────┐
-│ AWS Region (us-east-1) │
-│ │
-│ ┌─────────────────────────────────────────────────────────┐ │
-│ │ VPC: 10.100.0.0/16 │ │
-│ │ ┌─────────────────────────────────────────────────┐ │ │
-│ │ │ Public Subnets │ │ │
-│ │ │ ┌──────────────┐ ┌──────────────┐ │ │ │
-│ │ │ │ 10.100.1.0/24│ │ 10.100.2.0/24│ │ │ │
-│ │ │ │ (AZ-1a) │ │ (AZ-1b) │ │ │ │
-│ │ │ └──────────────┘ └──────────────┘ │ │ │
-│ │ └─────────────────────────────────────────────────┘ │ │
-│ │ │ │ │
-│ │ ┌─────────────────────────────────────────────────┐ │ │
-│ │ │ EKS Cluster │ │ │
-│ │ │ ┌─────────────┐ │ │ │
-│ │ │ │Control Plane│ (Managed by AWS) │ │ │
-│ │ │ └─────────────┘ │ │ │
-│ │ │ │ │ │
-│ │ │ ┌─────────────────────────────────────────┐ │ │ │
-│ │ │ │ Worker Node Groups │ │ │ │
-│ │ │ │ ┌─────────┐ ┌─────────┐ ┌─────────┐ │ │ │ │
-│ │ │ │ │On-Demand│ │On-Demand│ │On-Demand│ │ │ │ │
-│ │ │ │ │ Node │ │ Node │ │ Node │ │ │ │ │
-│ │ │ │ └─────────┘ └─────────┘ └─────────┘ │ │ │ │
-│ │ │ └─────────────────────────────────────────┘ │ │ │
-│ │ └─────────────────────────────────────────────────┘ │ │
-│ └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-▲
-│ (kubectl access)
-┌─────────────┐
-│ Laptop │
-│ (AWS CLI) │
-└─────────────┘
 ---
 
 ## 📦 Prerequisites
